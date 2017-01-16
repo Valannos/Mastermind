@@ -16,6 +16,8 @@ public class Mastermind {
      */
     public static void main(String[] args) {
 
+        Window win = new Window();
+
         Jeu j = new Jeu();
 
         int runToken = 0;
@@ -32,34 +34,9 @@ public class Mastermind {
             j.setNumOk(0);
             j.setUser();
 
-            
-            for (int k = 0; k < j.getTab().length; k++) {
-                j.getCheck()[k] = 0;
-                for (int i = 0; i < j.getUser().length; i++) {
+            j.setCheck(j.CheckMatchingValues());
 
-                    if (j.getUser()[i] == j.getTab()[k] && i == k) {
-
-                        j.getCheck()[k] = 2;
-
-                    } else if (j.getUser()[i] == j.getTab()[k] && i != k) {
-
-                        j.getCheck()[k] = 1;
-
-                    } else if (j.getUser()[i] != j.getTab()[k] && i != k && j.getCheck()[k] != 1) {
-
-                        j.getCheck()[k] = 0;
-
-                    }
-
-                    if (j.getCheck()[k] == 2) {
-                        break;
-                    }
-
-                }
-
-            }
-
-            j.setPresentNumbers();
+            System.out.print(j.setPresentNumbers());
 
         } while (runToken < 10 && j.Sum() != 8);
 

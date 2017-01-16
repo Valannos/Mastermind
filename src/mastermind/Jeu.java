@@ -30,6 +30,15 @@ public class Jeu {
 
     }
 
+    public Jeu(int[] game, int[] user) {
+        
+        
+        
+        this.tab = game;
+        this.user = user;
+
+    }
+
     public int[] getTab() {
 
         return tab;
@@ -59,7 +68,8 @@ public class Jeu {
         return sum;
     }
 
-    public void setPresentNumbers() {
+
+    public String setPresentNumbers() {
 
         for (int i = 0; i < this.check.length; i++) {
 
@@ -74,8 +84,8 @@ public class Jeu {
             }
 
         }
-        System.out.print(Color.ANSI_GREEN + "Il y a " + this.getNumOk() + " chiffres bien placé(s)." + Color.ANSI_RESET + "\t");
-        System.out.println(Color.ANSI_YELLOW + "Il y a " + this.getNumMisplaced() + " chiffres mal placé(s)." + Color.ANSI_RESET + "\t");
+       return (Color.ANSI_GREEN + "Il y a " + this.getNumOk() + " chiffres bien placé(s)." + Color.ANSI_RESET + "\t" +
+        Color.ANSI_YELLOW + "Il y a " + this.getNumMisplaced() + " chiffres mal placé(s)." + Color.ANSI_RESET + "\t");
 
     }
 
@@ -134,6 +144,43 @@ public class Jeu {
 
     public void setNumOk(int numOk) {
         this.numOk = numOk;
+    }
+    
+    
+    public int[] CheckMatchingValues () {
+        
+        int[] tabCheck = new int[4]; 
+        
+         for (int k = 0; k < this.tab.length; k++) {
+               tabCheck[k] = 0;
+                for (int i = 0; i < this.user.length; i++) {
+
+                    if (this.user[i] == this.tab[k] && i == k) {
+
+                        tabCheck[k] = 2;
+
+                    } else if (this.user[i] == this.tab[k] && i != k) {
+
+                        tabCheck[k] = 1;
+
+                    } else if (this.user[i] != this.tab[k] && i != k && tabCheck[k] != 1) {
+
+                        tabCheck[k] = 0;
+
+                    }
+
+                    if (tabCheck[k] == 2) {
+                        break;
+                    }
+
+                }
+
+            }
+        
+        
+        
+        
+        return tabCheck;
     }
 
 }
